@@ -22,16 +22,31 @@ CONTENTFUL_ACCESS_TOKEN=<your_access_token>
 ```
 Otherwise make sure your enviroment variables `CONTENTFUL_SPACE_ID` & `CONTENTFUL_ACCESS_TOKEN` are set on your hosted container
 
-Optionally under `config/contentful.yml` you can set the frequency of the syncs. The default is 1 minute
-```yml
-sync_interval: 5
-sync_interval_unit: minutes
-```
+#### First time running setup
 
-To start the service on docker-compose run the docker-compose up command
+Build the container
 
 ```
-docker-compose up
+docker-compose build
+```
+
+Start the service
+```
+docker-compose up -d
+```
+
+Setup the db
+
+```
+docker exec -it contentfuleverywhere_web_1 rake db:setup
+```
+
+#### General Usage
+
+To start the service on docker-compose run the docker-compose up command if you havnt already
+
+```
+docker-compose up -d
 ```
 
 You can test if the service is running by running the `docker ps` command
@@ -50,6 +65,14 @@ There should be 3 services running on the container
 |contentfuleverywhere_web|Provides a REST API to retrieve data via HTTP|
 |contentfuleverywhere_clockwork|Runs a cron job to sync data from Contentful|
 |postgres|database to persist data locally|
+
+### Configuration
+
+Optionally under `config/contentful.yml` you can set the frequency of the syncs. The default is 1 minute
+```yml
+sync_interval: 5
+sync_interval_unit: minutes
+```
 
 ## Running the tests
 
