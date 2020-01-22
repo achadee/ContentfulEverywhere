@@ -14,12 +14,11 @@ Clone the repo into a folder of your choice
 ```
 git clone https://github.com/achadee/ContentfulEverywhere
 ```
-If you are running the service on docker-compose make sure you set your contentful ENV variables in the `docker-compose.yml` before you start
+If you are running the service on docker-compose make sure you set your contentful ENV variables in the `contentful.local.env` before you start
 
-```yml
-environment:
-  CONTENTFUL_SPACE_ID: <your_space_id>
-  CONTENTFUL_ACCESS_TOKEN: <your_access_token>
+```bash
+CONTENTFUL_SPACE_ID=<your_space_id>
+CONTENTFUL_ACCESS_TOKEN=<your_access_token>
 ```
 Otherwise make sure your enviroment variables `CONTENTFUL_SPACE_ID` & `CONTENTFUL_ACCESS_TOKEN` are set on your hosted container
 

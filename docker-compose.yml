@@ -13,9 +13,10 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    environment:
-      CONTENTFUL_SPACE_ID: <your_space_id>
-      CONTENTFUL_ACCESS_TOKEN: <your_access_token>
+    env_file:
+      - 'contentful.local.env'
   clockwork:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec clockwork lib/clock.rb"
+    env_file:
+      - 'contentful.local.env'
