@@ -13,3 +13,6 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      CONTENTFUL_SPACE_ID: <your_space_id>
+      CONTENTFUL_ACCESS_TOKEN: <your_access_token>
