@@ -35,7 +35,22 @@ To start the service on docker-compose run the docker-compose up command
 docker-compose up
 ```
 
-If all is well port 3000 should be exposed to Contentful Everywhere!
+You can test if the service is running by running the `docker ps` command
+
+```bash
+CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORTS                    NAMES
+817cadb26021        contentfuleverywhere_web         "run.sh bash -c 'rm …"   13 seconds ago      Up 12 seconds       0.0.0.0:3000->3000/tcp   contentfuleverywhere_web_1
+8a02ba6a1fce        contentfuleverywhere_clockwork   "run.sh bash -c 'rm …"   13 seconds ago      Up 12 seconds       3000/tcp                 contentfuleverywhere_clockwork_1
+60c3c3d06a23        postgres                         "docker-entrypoint.s…"   2 hours ago         Up 12 seconds       5432/tcp                 contentfuleverywhere_db_1
+```
+
+There should be 3 services running on the container
+
+|service|responsibility|
+|-------|--------------|
+|contentfuleverywhere_web|Provides a REST API to retrieve data via HTTP|
+|contentfuleverywhere_clockwork|Runs a cron job to sync data from Contentful|
+|postgres|database to persist data locally|
 
 ## Running the tests
 

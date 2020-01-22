@@ -16,3 +16,6 @@ services:
     environment:
       CONTENTFUL_SPACE_ID: <your_space_id>
       CONTENTFUL_ACCESS_TOKEN: <your_access_token>
+  clockwork:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec clockwork lib/clock.rb"
