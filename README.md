@@ -1,24 +1,36 @@
-# README
+# Contentful Everywhere
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Offline syncing tool to manage Contentful entries
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+This project runs on Docker, so you can run it on a container service like [ECS]( https://aws.amazon.com/ecs/) or you can run it locally buy [installing docker](https://docs.docker.com/install/) on your machine
 
-* System dependencies
 
-* Configuration
+### Installing
 
-* Database creation
+Clone the repo into a folder of your choice
 
-* Database initialization
+```
+git clone https://github.com/achadee/ContentfulEverywhere
+```
 
-* How to run the test suite
+Run the docker-compose up command
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+docker-compose up
+```
 
-* Deployment instructions
+If all is well port 3000 should be exposed to Contentful Everywhere!
 
-* ...
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
