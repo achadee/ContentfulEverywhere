@@ -23,4 +23,4 @@ end
 
 # jobs
 #
-every(1.second, 'sync.content')
+every(10.seconds, 'sync.content')

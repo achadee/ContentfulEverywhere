@@ -19,7 +19,7 @@ class SyncLog < ApplicationRecord
   def run last_sync_id=nil
     raise Exceptions::SyncAlreadyStartedException if !self.starting?
     # get the sync response
-    last_sync_id.nil? ? sync = client.sync(initial: true) : sync = client.sync(SyncLog.find(last_sync_id).contentful_cdn_uri)
+    last_sync_id.nil? ? sync = client.sync(initial: true, type: 'Entry') : sync = client.sync(SyncLog.find(last_sync_id).contentful_cdn_uri)
 
     #
     # run a recursive function to process the results
@@ -35,14 +35,14 @@ class SyncLog < ApplicationRecord
     end
 
     def contentful_cdn_uri
-      "https://cdn.contentful.com/spaces/#{ENV['CONTENTFUL_SPACE_ID']}/sync?sync_token=#{self.token}"
+      "https://cdn.contentful.com/spaces/#{ENV['CONTENTFUL_SPACE_ID']}/sync?sync_token=#{self.token}&type=Entry"
     end
 
     def process_response sync
       # process all the items on this sync
       #
       sync.each_item do |resource|
-        puts resource
+        Entry.create_from_contentful_item resource
       end
     end
 end

@@ -22,15 +22,13 @@ CONTENTFUL_ACCESS_TOKEN=<your_access_token>
 ```
 Otherwise make sure your environment variables `CONTENTFUL_SPACE_ID` & `CONTENTFUL_ACCESS_TOKEN` are set on your hosted container
 
-#### First time running setup
-
-Run the setup command
+Run the setup command, this will build the containers for the first time and install a database
 
 ```
 ./setup.sh
 ```
 
-#### General Usage
+### Usage
 
 To start the service on docker-compose run the docker-compose up command if you havnt already
 
@@ -62,6 +60,18 @@ Optionally under `config/contentful.yml` you can set the frequency of the syncs.
 sync_interval: 5
 sync_interval_unit: minutes
 ```
+
+## Viewing your content
+
+All your content can be accessed locally via `localhost:3000/entries`
+
+By default we grab the first 100 entries from page 0 you can query any page using the `page` and `page_size` query parameters
+
+eg. `localhost:3000/entries?page=12&page_size=10`
+
+## Deleting your local data
+
+//todo
 
 ## Running the tests
 
