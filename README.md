@@ -14,31 +14,20 @@ Clone the repo into a folder of your choice
 ```
 git clone https://github.com/achadee/ContentfulEverywhere
 ```
-If you are running the service on docker-compose make sure you set your contentful ENV variables in the `contentful.local.env` before you start
+If you are running the service on docker-compose make sure you set your contentful ENV variables in the `contentful.local.env` before you start, if `contentful.local.env` doesn't exist (because I set git ignore on it) create a new one in the root directory:
 
 ```bash
 CONTENTFUL_SPACE_ID=<your_space_id>
 CONTENTFUL_ACCESS_TOKEN=<your_access_token>
 ```
-Otherwise make sure your enviroment variables `CONTENTFUL_SPACE_ID` & `CONTENTFUL_ACCESS_TOKEN` are set on your hosted container
+Otherwise make sure your environment variables `CONTENTFUL_SPACE_ID` & `CONTENTFUL_ACCESS_TOKEN` are set on your hosted container
 
 #### First time running setup
 
-Build the container
+Run the setup command
 
 ```
-docker-compose build
-```
-
-Start the service
-```
-docker-compose up -d
-```
-
-Setup the db
-
-```
-docker exec -it contentfuleverywhere_web_1 rake db:setup
+./setup.sh
 ```
 
 #### General Usage
