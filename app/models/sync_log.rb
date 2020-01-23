@@ -7,24 +7,35 @@ class SyncLog < ApplicationRecord
   # chech if the sync has finished
   #
   def finished?
-    [COMPLETED, FAILED].include? self.status
+    [COMPLETED, FAILED].include?(self.status) || ([STARTING, IN_PROGRESS].include?(self.status) && self.time_out_at < DateTime.now)
   end
 
-  def starting?
-    self.status == STARTING
+  def set_status status
+    self.status = status
+    self.save
   end
 
   # processes the sync and pull information if required
   #
   def run last_sync_id=nil
-    raise Exceptions::SyncAlreadyStartedException if !self.starting?
-    # get the sync response
-    last_sync_id.nil? ? sync = client.sync(initial: true, type: 'Entry') : sync = client.sync(SyncLog.find(last_sync_id).contentful_cdn_uri)
+    begin
+      # raise Exceptions::SyncStillInProgressException if !self.finished?
+      self.set_status(IN_PROGRESS)
 
-    #
-    # run a recursive function to process the results
-    #
-    process_response sync
+      # get the sync response
+      last_sync_id.nil? ? sync = client.sync(initial: true, type: 'Entry') : sync = client.sync(SyncLog.find(last_sync_id).delta_token)
+
+      #
+      # run a recursive function to process the results
+      #
+      process_response sync
+
+      # get the token from the response
+      self.delta_token = sync.next_sync_url
+      self.set_status(COMPLETED)
+    rescue HTTP::ConnectionError => e
+      self.set_status(FAILED)
+    end
   end
 
   private
@@ -32,10 +43,6 @@ class SyncLog < ApplicationRecord
     #
     def client
       Contentful::Client.new(access_token: ENV['CONTENTFUL_ACCESS_TOKEN'], space: ENV['CONTENTFUL_SPACE_ID'])
-    end
-
-    def contentful_cdn_uri
-      "https://cdn.contentful.com/spaces/#{ENV['CONTENTFUL_SPACE_ID']}/sync?sync_token=#{self.token}&type=Entry"
     end
 
     def process_response sync

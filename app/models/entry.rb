@@ -44,7 +44,6 @@ class Entry < ApplicationRecord
       else
         # if its a link to an asset parse it again
         #
-        puts value.class
         if ["Contentful::Link", "Contentful::Entry"].include?(value.class.to_s)
           node = value.sys
 

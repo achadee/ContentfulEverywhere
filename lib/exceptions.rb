@@ -1,3 +1,3 @@
 module Exceptions
-  class SyncAlreadyStartedException < StandardError; end
+  class SyncStillInProgressException < StandardError; end
 end

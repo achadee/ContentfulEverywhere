@@ -11,16 +11,16 @@ handler do |job|
 
   # grab the sync_id
   #
-  sync_id = last_sync.id if last_sync && last_sync.finished?
+  sync_id = last_sync.id if last_sync
 
   # run the job on a delayed job queue
   #
   # we do this because if there is alot of data between offline downtimes the sync
   # might take longer than the interval frequency
   #
-  SyncContentJob.perform_later sync_id
+  SyncContentJob.perform_later sync_id if !sync_id || last_sync.finished?
 end
 
 # jobs
 #
-every(10.seconds, 'sync.content')
+every(1.minute, 'sync.content')
