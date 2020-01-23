@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_043618) do
+ActiveRecord::Schema.define(version: 2020_01_23_010642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.string "entry_id"
+    t.text "data"
+    t.datetime "created_on_contentful_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_on_contentful_at"], name: "index_entries_on_created_on_contentful_at"
+    t.index ["entry_id"], name: "index_entries_on_entry_id", unique: true
+  end
 
   create_table "sync_logs", force: :cascade do |t|
     t.integer "status"
