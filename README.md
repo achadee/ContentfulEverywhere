@@ -90,7 +90,7 @@ I've provided a welcome screen at [localhost:3000](http://localhost:3000) here y
 
 * Run a manual Sync
 
-* Delete all your local data
+* Delete all your local data (so you can sync from the first entry again)
 
 ## Running the tests
 
