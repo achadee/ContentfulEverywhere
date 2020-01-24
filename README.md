@@ -94,12 +94,12 @@ I've provided a welcome screen at [localhost:3000](http://localhost:3000) here y
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+You can run tests by running the command
 
 ```
-Give an example
+docker exec -it contentfuleverywhere_web_1 rails test
 ```
+## Design choices
+
+I will go ove my design choices here so you have a better understanding of the system
+
