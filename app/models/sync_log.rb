@@ -50,6 +50,7 @@ class SyncLog < ApplicationRecord
 
     def process_response sync
       # process all the items on this sync
+      # docs say we can access every page using the 'each_item' block
       #
       sync.each_item do |resource|
         Entry.create_from_contentful_item resource
