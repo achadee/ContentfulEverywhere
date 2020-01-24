@@ -7,5 +7,7 @@ class SyncContentJob < ApplicationJob
     # run the sync log with the last sync_id
     #
     sync_log.run last_sync_id
+
+    return sync_log
   end
 end
