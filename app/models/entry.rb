@@ -18,6 +18,7 @@ class Entry < ApplicationRecord
     #
     # save or create the new entry
     entry.save
+    return entry
   end
 
   # because the to_json doesnt work with links (stack level too deep - due

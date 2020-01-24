@@ -11,6 +11,7 @@ class SyncLog < ApplicationRecord
   end
 
   def set_status status
+    return false if ![STARTING, IN_PROGRESS, COMPLETED, FAILED].include?(status)
     self.status = status
     self.save
   end
@@ -33,8 +34,10 @@ class SyncLog < ApplicationRecord
       # get the token from the response
       self.delta_token = sync.next_sync_url
       self.set_status(COMPLETED)
+      return true
     rescue HTTP::ConnectionError => e
       self.set_status(FAILED)
+      return false
     end
   end
 
