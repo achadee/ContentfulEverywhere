@@ -4,10 +4,12 @@
   <input type="submit" value="View your data">
 </form>
 
-<form action ="company/admin/add_product/editProduct" method="post">
-  <input type="submit" value="Sync your data">
+<form action ="entries" method="post">
+  <input type="submit" value="Manually sync your data">
 </form>
 
-<form action ="company/admin/add_product/editProduct" method="post">
-  <input type="submit" value="Delete all your local data">
+<!-- I would normally run this by a delete method but because this is an example
+ and I dont want to write any JS ill run it through post -->
+<form action ="delete_data" method="post">
+  <input type="submit" value="Delete your local data">
 </form>
