@@ -55,23 +55,30 @@ There should be 3 services running on the container
 
 ### Configuration
 
-Optionally under `config/contentful.yml` you can set the frequency of the syncs. The default is 1 minute
-```yml
-sync_interval: 5
-sync_interval_unit: minutes
+Optionally under `lib/clock.rb` you can set the frequency of the syncs. The default is 1 minute
+```ruby
+every(5.minutes, 'sync.content')
 ```
 
 ## Viewing your content
 
-All your content can be accessed locally via `localhost:3000/entries`
+All your content can be accessed locally via [localhost:3000/entries](localhost:3000/entries)
 
 By default we grab the first 100 entries from page 0 you can query any page using the `page` and `page_size` query parameters
 
 eg. `localhost:3000/entries?page=12&page_size=10`
 
-## Deleting your local data
+## Accessing the welcome screen
 
-//todo
+![Welcome screen](https://images.ctfassets.net/5vmd0zjzbdm9/2fwdivHUn2oXAYnSTajEKV/17d6323816d415f7967b19b8096213a9/Screen_Shot_2020-01-24_at_10.35.45_am.png?h=250)
+
+I've provided a welcome screen at [localhost:3000](localhost:3000) here you can
+
+* View your local entries
+
+* Run a manual Sync
+
+* Delete all your local data
 
 ## Running the tests
 
