@@ -6,8 +6,8 @@ include Clockwork
 
 handler do |job|
 
-  # Get the last sync
-  last_sync = SyncLog.last
+  # Get the last sucessful sync
+  last_sync = SyncLog.where.not(delta_token: nil).last
 
   # grab the sync_id
   #
