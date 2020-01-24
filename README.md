@@ -16,6 +16,18 @@ git clone https://github.com/achadee/ContentfulEverywhere
 ```
 If you are running the service on docker-compose make sure you set your contentful ENV variables in the `contentful.local.env` before you start, if `contentful.local.env` doesn't exist (because I set git ignore on it) create a new one in the root directory:
 
+<pre>
+ContentfulEverywhere/
+├── app
+├── bin
+├── config
+├── ...
+├── <b>contentful.local.env</b>
+└── ...
+</pre>
+
+with the contents:
+
 ```bash
 CONTENTFUL_SPACE_ID=<your_space_id>
 CONTENTFUL_ACCESS_TOKEN=<your_access_token>
